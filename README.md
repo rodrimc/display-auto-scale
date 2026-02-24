@@ -1,5 +1,9 @@
 # display-auto-scale
 
+<p align="center">
+  <img src="thumbnail.png" alt="display-auto-scale" width="400">
+</p>
+
 Automatically adjusts your laptop's display scaling when external monitors are connected or disconnected. No polling, no Explorer restart — just instant DPI changes using the same API as the Windows Settings app.
 
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-blue?logo=windows)
