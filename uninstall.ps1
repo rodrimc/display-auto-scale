@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Removes the DisplayAutoScale scheduled task.
+    Removes the DockScale scheduled task.
 #>
 
-$taskName = "DisplayAutoScale"
+$taskName = "DockScale"
 
 $existing = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if ($existing) {
@@ -16,4 +16,11 @@ if ($existing) {
     Write-Host "Scheduled task '$taskName' removed." -ForegroundColor Green
 } else {
     Write-Host "Scheduled task '$taskName' not found. Nothing to remove."
+}
+
+# Remove installed script
+$installDir = Join-Path $env:LOCALAPPDATA "DockScale"
+if (Test-Path $installDir) {
+    Remove-Item -Path $installDir -Recurse -Force
+    Write-Host "Removed installed files from: $installDir"
 }

@@ -1,7 +1,7 @@
-# display-auto-scale
+# DockScale
 
 <p align="center">
-  <img src="thumbnail.png" alt="display-auto-scale" width="400">
+  <img src="thumbnail.png" alt="DockScale" width="400">
 </p>
 
 Automatically adjusts your laptop's display scaling when external monitors are connected or disconnected. No polling, no Explorer restart — just instant DPI changes using the same API as the Windows Settings app.
@@ -39,7 +39,7 @@ Run the install script (as Administrator) to start the watcher automatically at 
 
 The watcher starts immediately and will auto-start at every logon — completely hidden, no console window.
 
-To remove:
+To remove (also requires an elevated shell):
 
 ```powershell
 .\uninstall.ps1

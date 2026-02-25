@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Installs a scheduled task to run display-auto-scale at logon.
+    Installs the DockScale scheduled task to run at logon.
 .DESCRIPTION
     Creates a Windows Task Scheduler task that launches the watcher script
     when the current user logs on. The task runs hidden in the background.
@@ -8,13 +8,22 @@
 
 $ErrorActionPreference = 'Stop'
 
-$taskName = "DisplayAutoScale"
-$scriptPath = Join-Path $PSScriptRoot "display-auto-scale.ps1"
+$taskName = "DockScale"
+$sourcePath = Join-Path $PSScriptRoot "display-auto-scale.ps1"
 
-if (-not (Test-Path $scriptPath)) {
-    Write-Error "display-auto-scale.ps1 not found at: $scriptPath"
+if (-not (Test-Path $sourcePath)) {
+    Write-Error "display-auto-scale.ps1 not found at: $sourcePath"
     exit 1
 }
+
+# Copy script to a stable install location
+$installDir = Join-Path $env:LOCALAPPDATA "DockScale"
+if (-not (Test-Path $installDir)) {
+    New-Item -ItemType Directory -Path $installDir -Force | Out-Null
+}
+$scriptPath = Join-Path $installDir "display-auto-scale.ps1"
+Copy-Item -Path $sourcePath -Destination $scriptPath -Force
+Write-Host "Installed script to: $scriptPath"
 
 # Remove existing task if present
 $existing = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue

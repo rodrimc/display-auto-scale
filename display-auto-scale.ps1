@@ -303,15 +303,10 @@ if ($Watch) {
         }
     })
 
-    # Run a hidden message loop (required for SystemEvents to fire)
-    $form = New-Object System.Windows.Forms.Form
-    $form.ShowInTaskbar = $false
-    $form.WindowState = [System.Windows.Forms.FormWindowState]::Minimized
-    $form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::None
-    $form.Size = New-Object System.Drawing.Size(0, 0)
-    $form.Opacity = 0
-
-    [System.Windows.Forms.Application]::Run($form)
+    # Run a message loop (required for SystemEvents to fire) — no window needed
+    [System.Windows.Forms.Application]::Run(
+        [System.Windows.Forms.ApplicationContext]::new()
+    )
 } else {
     Update-DisplayScale
 }
